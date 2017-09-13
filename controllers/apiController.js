@@ -23,7 +23,7 @@ module.exports = function (app){
             
           
             client
-              .query('select * from main where id = '+personId+' limit 1')
+              .query('select * from people where id = '+personId+' limit 1')
               .on('row', function(row) {
                 
                 results.push(row);
@@ -54,7 +54,7 @@ module.exports = function (app){
         pg.connect(connection.getDBConnStr, function(err, client) {
             if (err) throw err;
             client
-              .query("SELECT id,givenname,middleinitial,surname FROM main WHERE givenname ILIKE '%"+search+"%' or surname ILIKE '%"+search+"%'")
+              .query("SELECT id,givenname,middleinitial,surname FROM people WHERE givenname ILIKE '%"+search+"%' or surname ILIKE '%"+search+"%'")
               .on('row', function(row) {  
                   //use On Row & End event since the output is cleaner then result callback funciton.  May not be the best technique until the 
                   //PG library can be confirmed it's faster for large scale data
